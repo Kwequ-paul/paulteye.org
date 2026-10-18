@@ -1,0 +1,7 @@
+project_id,title,category,summary,status,public_url,repository_url,featured
+P001,Adaptive Cybersecurity Training,Research,"Scenario-based cybersecurity learning concept for transition-age students",In progress,,,true
+P002,Predicting Student Engagement,Publication,"Co-authored research on machine learning for engagement and academic performance",Published,,,true
+P003,@AbroadWithPaul,Outreach,"Study-abroad information and scholarship guidance for African students",Ongoing,,,true
+P004,Digital Skills and Cybersecurity Training,Teacher development,"Teacher training in cybersecurity awareness data protection and responsible AI use",Ongoing,,,false
+P005,Japanese-to-English Discord Bot,Software project,"Learning project exploring translation automation in Discord",Prototype,,,false
+P006,Community English Learning,Community education,"Volunteer-oriented English learning concept for children",Planning,,,false
