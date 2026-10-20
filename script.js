@@ -12,9 +12,11 @@ async function loadPortfolioData(){
     const data = await response.json();
     renderPublications(data.publications || []);
     renderProjects(data.projects || []);
+    renderEducation(data.education || []);
+    renderExperience(data.experience || []);
   } catch (error) {
     const message = 'The records could not be loaded right now. Please try refreshing this page later.';
-    ['publication-list','project-list'].forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=`<p class="notice">${message}</p>`; });
+    ['publication-list','project-list','education-list','experience-list'].forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=`<p class="notice">${message}</p>`; });
     const status=document.getElementById('publication-status'); if(status) status.textContent='Live database connection unavailable.';
     console.error('Portfolio API error:', error);
   }
@@ -55,3 +57,35 @@ function renderProjects(items){
   }).join('');
 }
 loadPortfolioData();
+
+function renderEducation(items){
+  const target=document.getElementById('education-list'); if(!target) return;
+  const visible=items.filter(item=>String(item.status||'Published').toLowerCase()!=='draft');
+  if(!visible.length){target.innerHTML='<p class="notice">No public education records are available yet.</p>';return;}
+  target.innerHTML=visible.map(item=>{
+    const qualification=escapeHTML(item.qualification||item.degree||item.title||item.name||'Academic qualification');
+    const institution=escapeHTML(item.institution||item.school||item.organization||'');
+    const location=escapeHTML(item.location||'');
+    const start=escapeHTML(item.startDate||item.start||''); const end=escapeHTML(item.endDate||item.end||item.graduationDate||'');
+    const period=[start,end].filter(Boolean).join(' — ');
+    const description=escapeHTML(item.description||item.details||item.achievement||'');
+    const award=escapeHTML(item.honors||item.grade||item.result||'');
+    return `<div class="timeline-item"><span class="pill">${escapeHTML(item.type||'EDUCATION')}</span>${period?`<p class="timeline-date">${period}</p>`:''}<h3>${qualification}</h3>${institution?`<p class="institution">${institution}${location?' · '+location:''}</p>`:''}${description?`<p>${description}</p>`:''}${award?`<p><strong>Honours / result:</strong> ${award}</p>`:''}</div>`;
+  }).join('');
+  const status=document.getElementById('education-status'); if(status)status.textContent=`${visible.length} education record${visible.length===1?'':'s'} loaded from the portfolio database.`;
+}
+function renderExperience(items){
+  const target=document.getElementById('experience-list'); if(!target) return;
+  const visible=items.filter(item=>String(item.status||'Published').toLowerCase()!=='draft');
+  if(!visible.length){target.innerHTML='<p class="notice">No public experience records are available yet.</p>';return;}
+  target.innerHTML=visible.map((item,i)=>{
+    const role=escapeHTML(item.role||item.position||item.title||item.name||'Professional role');
+    const organization=escapeHTML(item.organization||item.institution||item.employer||'');
+    const location=escapeHTML(item.location||'');
+    const start=escapeHTML(item.startDate||item.start||''); const end=escapeHTML(item.endDate||item.end||'');
+    const period=[start,end].filter(Boolean).join(' — ');
+    const description=escapeHTML(item.description||item.responsibilities||item.details||'');
+    return `<div class="timeline-item"><span class="pill">${escapeHTML(item.type||'EXPERIENCE')}</span>${period?`<p class="timeline-date">${period}</p>`:''}<h3>${role}</h3>${organization?`<p class="institution">${organization}${location?' · '+location:''}</p>`:''}${description?`<p>${description.replace(/\n/g,'<br>')}</p>`:''}</div>`;
+  }).join('');
+  const status=document.getElementById('experience-status'); if(status)status.textContent=`${visible.length} experience record${visible.length===1?'':'s'} loaded from the portfolio database.`;
+}
