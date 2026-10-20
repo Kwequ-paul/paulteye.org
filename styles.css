@@ -6,3 +6,179 @@
 @media(max-width:640px){.header{height:67px}.menu{display:block}.nav{display:none;position:absolute;left:0;right:0;top:66px;background:var(--paper);padding:19px 6%;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line)}.nav.open{display:flex}.navbutton{text-align:center}.wrap{padding:0 20px}.hero{display:flex;flex-direction:column;align-items:stretch;padding-top:55px}.hero h1{font-size:clamp(42px,12vw,57px)}.visual{min-height:345px}.section{padding:58px 0}.grid.two,.grid.three,.feature{grid-template-columns:1fr}.feature-art{min-height:220px}.feature-copy{padding:24px}.row{grid-template-columns:75px 1fr 18px;gap:10px}.row .date{font-size:9px}.row h3{font-size:15px}.footer{flex-wrap:wrap;padding:22px 6%}.footer small{width:100%}.download{align-items:flex-start;flex-direction:column}}
 
 .photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.photo-grid figure{margin:0;background:#fff;border:1px solid #e1e5dc;border-radius:14px;overflow:hidden}.photo-grid img{display:block;width:100%;height:230px;object-fit:cover}.photo-grid figure:first-child img{object-position:center 25%}.photo-grid figcaption{padding:11px 12px;font-size:12px;color:#59645b;line-height:1.45}@media(max-width:800px){.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-grid img{height:200px}}@media(max-width:460px){.photo-grid{grid-template-columns:1fr}.photo-grid img{height:auto;max-height:420px}}
+
+/* =========================================
+   HOMEPAGE DESIGN ENHANCEMENTS
+   ========================================= */
+
+/* Improve readability and consistency */
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #b9f36b;
+  color: #163c32;
+}
+
+a,
+button,
+.card,
+.photo-grid img {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Make navigation clearer */
+.nav a:not(.navbutton):hover {
+  color: #2f7447;
+}
+
+.nav a:focus-visible,
+.btn:focus-visible,
+.menu:focus-visible,
+.brand:focus-visible {
+  outline: 3px solid #76a957;
+  outline-offset: 4px;
+}
+
+/* Give the opening section more polish */
+.hero {
+  padding-top: 92px;
+  padding-bottom: 68px;
+}
+
+.hero .eyebrow {
+  display: inline-block;
+  padding: 7px 11px;
+  background: #eaf2e4;
+  border-radius: 6px;
+}
+
+.hero h1 {
+  max-width: 680px;
+  letter-spacing: -0.055em;
+}
+
+.intro {
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+/* Refine buttons */
+.btn {
+  min-height: 44px;
+  justify-content: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px #163c3212;
+}
+
+.btn.primary:hover {
+  background: #245747;
+}
+
+.btn.light:hover {
+  background: #c9f68e;
+}
+
+/* Improve section headings */
+.sectionhead h2 {
+  max-width: 760px;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* Make information cards feel more refined */
+.card {
+  box-shadow: 0 3px 12px #15221f05;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #c8d8c2;
+  box-shadow: 0 12px 30px #15221f0d;
+}
+
+/* Enhance conference photographs */
+.photo-grid figure {
+  box-shadow: 0 4px 16px #15221f08;
+}
+
+.photo-grid figure:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px #15221f12;
+}
+
+.photo-grid img {
+  transition: transform 0.35s ease;
+}
+
+.photo-grid figure:hover img {
+  transform: scale(1.025);
+}
+
+/* Make research content easier to scan */
+.feature {
+  box-shadow: 0 16px 45px #15221f0d;
+}
+
+.feature-copy {
+  align-self: center;
+}
+
+.tags span {
+  line-height: 1.5;
+}
+
+/* Improve mobile navigation and layout */
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 56px;
+    padding-bottom: 38px;
+  }
+
+  .hero h1 {
+    line-height: 1.08;
+  }
+
+  .actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .sectionhead h2 {
+    line-height: 1.18;
+  }
+
+  .photo-grid {
+    gap: 14px;
+  }
+
+  .nav {
+    max-height: calc(100vh - 67px);
+    overflow-y: auto;
+  }
+}
+
+/* Respect visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
