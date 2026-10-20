@@ -33,3 +33,7 @@ Import the CSV files in `data/` into Airtable as starter tables for Projects, Pu
 
 ## Privacy and accuracy
 Verify each statement before public use. Do not upload student identifiers, private data, credentials, API keys, access tokens, or confidential research material.
+
+
+## Airtable / Cloudflare Worker integration
+The Publications and Projects pages fetch public records from the Cloudflare Worker endpoint configured in `script.js`. Airtable credentials must remain in Cloudflare Worker secrets and must never be placed in this repository or browser code. The Worker should return JSON with `publications` and `projects` arrays, as in the current API response. If the browser reports a CORS error, configure the Worker to return `Access-Control-Allow-Origin: https://paulteye.org` (and the appropriate `OPTIONS` response if needed), then redeploy the Worker. Test the site after uploading the updated files to GitHub Pages.
